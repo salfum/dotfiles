@@ -1,2 +1,2 @@
 # dotfiles
- :penguin: Linux configuration files 🐧
+ :penguin: Linux configuration files

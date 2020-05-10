@@ -11,7 +11,7 @@ cp -rf ~/.config/kitty/ ./config/
 cp -rf ~/.config/neofetch/ ./config/
 cp -rf ~/.config/picom/ ./config/
 
-cp ~/.config/.bashrc ./config/
+cp ~/.bashrc ./config/
 
 cp ~/.mozilla/firefox/SalfumProfile/prefs.js ./mozilla/
 cp ~/.mozilla/firefox/SalfumProfile/user.js ./mozilla/

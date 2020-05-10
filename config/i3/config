@@ -1,0 +1,302 @@
+# Salfum's i3wm config
+
+set $mod Mod4
+
+#*******************************#
+#****  ИЗМЕНЁННЫЕ НАСТРОЙКИ  ***#
+#*******************************#
+
+# цвета окон
+# class             border  backgr. text    indicator child_border
+# client.focused   #4c7899 #04263F #04263F #04263F   #04263F
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #30AD23   #30AD23
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
+
+# Убирает рамки окна если оно одно на рабочем столе
+hide_edge_borders none #smart
+
+# Закрепление программы за рабочей областью
+#assign [class="KotatogramDesktop"] 3.
+assign [class="^Firefox$"] 1.
+
+# Демоны
+exec --no-startup-id xrandr --output VGA-0 --auto --left-of HDMI-0
+exec nitrogen --restore
+exec_always picom --config ~/.config/picom/compton.conf #compton -f -b --vsync
+exec unclutter -b
+exec_always --no-startup-id killall dunst || dunst -conf ~/.config/dunst/newdunstrc
+exec flameshot
+exec fluxgui
+exec_always --no-startup-id killall i3icons2 && i3icons2 -c ~/.config/i3/i3icons2.config || i3icons2 -c ~/.config/i3/i3icons2.config
+#exec clipmenud
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+exec xsel --logfile /dev/null -i --clipboard
+
+#Раскладка
+exec setxkbmap "us,ru" ",winkeys" "grp:caps_toggle" -option altwin:swap_lalt_lwin -option caps:nocaps
+
+# Раскладки Dvorak с переключением
+# bindsym $mod+Prior exec --no-startup-id "setxkbmap -layout us,ru -variant dvp,winkeys -option grp:lwin_toggle, caps:backspace"
+# bindsym $mod+Next exec --no-startup-id "setxkbmap -layout us,ru -variant ,winkeys -option grp:lwin_toggle, caps:backspace"
+
+# Смена воркспейса
+# bindsym $mod+ampersand exec --no-startup-id ~/.config/i3/workspaceSwitcher.py next
+# bindsym $mod+Shift+ampersand exec --no-startup-id ~/.config/i3/workspaceSwitcher.py prev
+
+# Программы
+exec kotatogram-desktop
+exec firefox
+
+# Параметры телеграма для работы в режиме scratchpad
+for_window [class="KotatogramDesktop"] floating enable
+for_window [class="KotatogramDesktop"] resize set 900 700
+for_window [class="KotatogramDesktop"] move position center
+exec --no-startup-id  "sleep 5; i3-msg '[instance=kotatogram-desktop] mark telescratch, move scratchpad'"
+
+# Спрятать окно в фокусе в скратчпад
+bindsym $mod+Shift+grave mark telescratch, move scratchpad
+
+# Показать скратчпад
+bindsym $mod+grave [con_mark="^telescratch$"] scratchpad show
+
+# Хоткеи программ
+bindsym $mod+F2 exec firefox
+bindsym $mod+F3 exec spacefm
+
+# Настройки rofi
+bindsym $mod+d exec xkb-switch -s 'us' & rofi -show drun -show-icons
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+Shift+p exec keepmenu
+bindsym $mod+Shift+n exec ~/.local/share/rofi/rofi_notes.sh
+#bindsym $mod+Shift+f exec rofi -show file-browser -modi file-browser
+#bindsym $mod+Shift+c exec clipmenu
+
+# Шрифт заголовков окон
+font pango:Roboto Light 12
+#font xft:Noto Sans 10
+
+# Убить окно по клику
+bindsym $mod+Shift+x exec kitty xkill
+
+# Скрин всего экрана
+bindsym Print exec flameshot screen -c
+# Скрин области
+bindsym Shift+Print exec flameshot gui
+
+# Вызов экранной лупы
+#bindsym $mod+m exec slop -r crosshair
+
+# Блокировка экрана
+bindsym $mod+p exec xkb-switch -s us && ~/.config/i3/i3lock-multimonitor/lock #i3lock -i ~/Изображения/123.png -t -f
+
+# Изменение громкости
+bindsym $mod+F7 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10%
+bindsym $mod+F6 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10%
+bindsym $mod+F5 exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle
+
+# Конфигурация панели
+bar {
+    status_command  i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
+    tray_output primary
+    font pango:Fira Code Medium 14 #11.7
+    separator_symbol "|"
+    position top
+    modifier $mod
+    mode hide
+    
+    colors {
+            # whole color settings
+            background   #04263F
+            statusline   $white
+            separator    $cyan
+
+            # type             border      backgr.     font
+            focused_workspace  #04263F      $white      $black
+            active_workspace   $white       $white      $black
+            inactive_workspace #04263F      #183458     $white
+            urgent_workspace   $valencia   $valencia   $black
+    }
+}
+
+
+#*******************************#
+#***  СТАНДАРТНЫЕ НАСТРОЙКИ  ***#
+#*******************************#
+
+# color variables
+set $grey                #334455
+set $magenta             #ddbbcc
+set $blue                #557788
+set $cyan                #22ddcc
+set $black               #334455
+set $white               #aacccc
+set $yellow              #dd9933
+set $red                 #aa5566
+set $green               #779988
+
+# theme colors
+set $bg-color            #334455
+set $inactive-bg-color   #334455
+set $text-color          #aacccc
+set $inactive-text-color #557788
+set $urgent-bg-color     #ee3355
+
+# Ширина рамок окон
+new_window pixel 3
+new_float normal
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Запуск терминала
+bindsym $mod+Return exec kitty
+
+# Закрыть окно в фокусе
+bindsym $mod+Shift+q kill
+
+# Смена фокуса окна
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# Альтернативная смена фокуса окна стрелочками
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Передвижение окна в фокусе (тайлинг)
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# Альтернативное передвижение окна в фокусе стрелочками
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+
+bindsym $mod+Shift+Right move right
+
+# Горизонтальное разделение
+bindsym $mod+h split h
+
+# Вертикальное разделение
+bindsym $mod+v split v
+
+# Переносит окно в фокусе в полноэкранный режим
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Переключает тайлинг / флоатинг
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# Переместить фокус на родительский контейнер
+bindsym $mod+a focus parent
+
+# Переместить фокус на дочерний контейнер
+#bindsym $mod+d focus child
+
+# Завершение работы
+bindsym $mod+o mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Список рабочих областей (столов)
+# 1. 2. 3. 4. 5. 6. 7. 8. 9. 10.
+
+set $ws1 "1." 
+set $ws2 "2." 
+set $ws3 "3." 
+set $ws4 "4." 
+set $ws5 "5." 
+set $ws6 "6." 
+set $ws7 "7."
+set $ws8 "8."
+set $ws9 "9."
+set $ws10 "10."
+
+# Переключение рабочих областей
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Перемещение окна в фокусе на рабочие области
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Перечитать конфигурационный файл
+#bindsym $mod+Shift+c reload
+# Перезапуск оконного менеджера
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"

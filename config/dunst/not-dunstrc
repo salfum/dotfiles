@@ -1,0 +1,29 @@
+frame_color = "#93a1a1"
+separator_color = "#93a1a1"
+
+[base16_low]
+    msg_urgency = low
+    background = "#073642"
+    foreground = "#657b83"
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#586e75"
+    foreground = "#93a1a1"
+
+[base16_critical]
+    msg_urgency = critical
+    background = "#dc322f"
+    foreground = "#eee8d"
+
+# Список рабочих областей (столов)
+set $ws1 "1."
+set $ws2 "2."
+set $ws3 "3."
+set $ws4 "4."
+set $ws5 "5."
+set $ws6 "6."
+set $ws7 "7."
+set $ws8 "8."
+set $ws9 "9."
+set $ws10 "10."

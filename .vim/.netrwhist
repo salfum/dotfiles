@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
-let g:netrw_dirhist_3='/home/salfum/.config/keepmenu'
-let g:netrw_dirhist_2='/home/salfum/.config/neofetch'
-let g:netrw_dirhist_1='/home/salfum/.config/yay'

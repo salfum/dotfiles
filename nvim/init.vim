@@ -1,15 +1,10 @@
 "--- Plugins ---"
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-
-	Plugin 'VundleVim/Vundle.vim'
-	Plugin 'lyokha/vim-xkbswitch'
+call plug#begin('~/.vim/plugged')
+	Plug 'lyokha/vim-xkbswitch'
 
 	" colorschemes
-	Plugin 'frankier/neovim-colors-solarized-truecolor-only'
-
-	call vundle#end()       
-	filetype plugin indent on
+	Plug 'frankier/neovim-colors-solarized-truecolor-only'
+call plug#end()
 
 "--- General settings ---"
 " theme

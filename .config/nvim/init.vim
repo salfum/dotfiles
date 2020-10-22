@@ -1,6 +1,11 @@
 "--- Plugins ---"
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
+	Plug 'tpope/vim-surround'
 	Plug 'lyokha/vim-xkbswitch'
+
+	" airline
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 
 	" colorschemes
 	Plug 'frankier/neovim-colors-solarized-truecolor-only'
@@ -13,10 +18,13 @@ set background=dark
 colorscheme solarized
 call togglebg#map("<F5>")
 
+"--- Airline settings ---"
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+
 " editor
 syntax enable 			" Syntax highlight
 set nocompatible              	" be iMproved, required
-filetype off                  	" required
 let mapleader = ','		" Make ',' as default leader 
 
 set backspace=indent,eol,start 	" Make backspace behave like every other editor.
@@ -25,7 +33,7 @@ set number			" Set line numbers
 "--- Auto-Commands ---"
 augroup autosourcing
 	autocmd!
-	autocmd BufWritePost .vimrc source %	" Automatically source the .vimrc file on save
+	autocmd BufWritePost ~/.config/nvim/init.vim source %	" Automatically source the .vimrc file on save
 augroup END
 
 "--- Search ---"

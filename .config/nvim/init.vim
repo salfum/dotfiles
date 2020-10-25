@@ -1,88 +1,62 @@
-"--- Plugins ---"
-call plug#begin('~/.config/nvim/plugged')
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'tpope/vim-surround'
-	Plug 'lyokha/vim-xkbswitch'
-	Plug 'preservim/nerdtree' |
-        	\ Plug 'Xuyuanp/nerdtree-git-plugin'
-	Plug 'ryanoasis/vim-devicons'
-
-	" airline
-	Plug 'vim-airline/vim-airline' |
-		\ Plug 'vim-airline/vim-airline-themes'
-
-	" colorschemes
-	Plug 'frankier/neovim-colors-solarized-truecolor-only'
-call plug#end()
-
 "--- General settings ---"
+" Plugins
+source ~/.config/nvim/plugins.vim
+
 " theme
 set termguicolors
 set background=dark
 colorscheme solarized
 call togglebg#map("<F5>")
 
-"--- Airline settings ---"
-let g:airline_theme='solarized'
-let g:airline_powerline_fonts = 1
-
-let g:webdevicons_enable = 1
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_enable_airline_statusline = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchIMappings = ['ru']
-
 " editor
-syntax enable 			" Syntax highlight
-set nocompatible              	" be iMproved, required
-let mapleader = ','		" Make ',' as default leader 
+syntax enable 			                " Syntax highlight
+set nocompatible              	        " be iMproved, required
+let mapleader = ','		                " Make ',' as default leader 
 set guifont=Fira\ Code:h12
-set backspace=indent,eol,start 	" Make backspace behave like every other editor.
-set number			" Set line numbers
+set backspace=indent,eol,start 	        " Make backspace behave like every other editor.
+set number			                    " Set line numbers
 
+" spaces
 set tabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
 set smartindent
 
-"--- Auto-Commands ---"
-augroup autosourcing
-	autocmd!
-	autocmd BufWritePost ~/.config/nvim/init.vim source %	" Automatically source the .vimrc file on save
-augroup END
-
-"--- Search ---"
-set hlsearch        " Enable search highlight
-set incsearch		" Enable incremental search
+" search
+set hlsearch                            " Enable search highlight
+set incsearch		                    " Enable incremental search
 
 "--- Mappings ---"
 nmap <Leader>ev :tabedit $MYVIMRC<cr>	" Make it easy to edit the .vimrc file
+nmap <Leader>ep :tabedit ~/.config/nvim/plugins.vim<cr>	" Make it easy to edit the .vimrc file
 nmap <Leader><space> :nohlsearch<cr>	" Add simple highlight removal
+nmap <Leader><space> :nohlsearch<cr>	" Add simple highlight removal
+nmap <Leader>w :w!<CR>                  " ,w save current file like :w
 
-"--- Plugin Mappings ---"
-map <C-n> :NERDTreeToggle<CR>
+"--- Split Management ---"
+set splitbelow
+set splitright
 
-inoremap kj <ESC>
-inoremap ло <ESC>
+nmap <C-H> <C-W><C-H>
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+nmap <C-L> <C-W><C-L>
 
+inoremap kj <ESC>                       " Escape from insert mod when press kj
+inoremap ло <ESC>                       " or ru keys ло instead of Escape 
 
-nmap <Leader>w :w!<CR>
-
-nmap о j
-nmap л k
-nmap р h
-nmap д l
-nmap ш i
-nmap ф a
-nmap в d
-
-"get rid of [  ] around icons in NerdTree
+"--- Final ---"
+" get rid of [  ] around icons in NerdTree
 if exists("g:loaded_webdevicons")
-	call webdevicons#refresh()
+	call webdevicons#refresh()          " prevent loading nerdfonts icons twice
 endif
+
+" autocommands
+augroup autosourcing
+	autocmd!
+	autocmd BufWritePost ~/.config/nvim/init.vim source %	" Automatically source the nvim config file on save
+augroup END
 
 " Some plugin seems to search for something at startup, so this fixes that.
 silent! nohlsearch

@@ -7,6 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'preservim/nerdtree' |
         	\ Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'ryanoasis/vim-devicons'
+    Plug 'mhinz/vim-startify'
 
 	" airline
 	Plug 'vim-airline/vim-airline' |

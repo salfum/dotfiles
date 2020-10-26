@@ -33,14 +33,20 @@ let g:XkbSwitchEnabled = 1
 let g:XkbSwitchIMappings = ['ru']
 
 "--- CtrlP ---"
+nmap <c-m> :CtrlPMRU<CR>
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 "--- fzf ---"
 nmap ; :Buffers<CR>
-nmap <Leader>t :Files<CR>
+nmap <Leader>f :Files<CR>
 nmap <Leader>r :Tags<CR>
+
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+let g:fzf_preview_window = ['right:40%', 'ctrl-/']
 
 " PLUGIN MAPPINGS
 "--- NERDtree ---"

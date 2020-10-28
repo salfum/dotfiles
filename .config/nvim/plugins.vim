@@ -3,6 +3,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-abolish'
 	Plug 'lyokha/vim-xkbswitch'
     Plug 'Yggdroot/indentLine'
     Plug 'ludovicchabant/vim-gutentags'

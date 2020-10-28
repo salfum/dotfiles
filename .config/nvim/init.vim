@@ -56,6 +56,7 @@ endif
 augroup autosourcing
 	autocmd!
 	autocmd BufWritePost ~/.config/nvim/init.vim source %	" Automatically source the nvim config file on save
+	autocmd BufWritePost ~/.config/nvim/plugins.vim source ~/.config/nvim/init.vim	" Automatically source the nvim config file on save
 augroup END
 
 " Some plugin seems to search for something at startup, so this fixes that.

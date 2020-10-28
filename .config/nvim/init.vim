@@ -14,7 +14,12 @@ set nocompatible              	        " be iMproved, required
 let mapleader = ','		                " Make ',' as default leader 
 set guifont=Fira\ Code:h12
 set backspace=indent,eol,start 	        " Make backspace behave like every other editor.
-set number			                    " Set line numbers
+set number relativenumber               " Set line numbers
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 
 " spaces
 set tabstop=4

@@ -4,10 +4,12 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'lyokha/vim-xkbswitch'
+    Plug 'Yggdroot/indentLine'
+    Plug 'ludovicchabant/vim-gutentags'
+
 	Plug 'preservim/nerdtree' |
         	\ Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'ryanoasis/vim-devicons'
-    Plug 'mhinz/vim-startify'
 
 	" airline
 	Plug 'vim-airline/vim-airline' |
@@ -48,6 +50,11 @@ nmap <Leader>r :Tags<CR>
 
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 let g:fzf_preview_window = ['right:40%', 'ctrl-/']
+
+"--- Gutentags ---"
+let g:gutentags_cache_dir = '~/.tags'
+let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_project_root = ['.git']
 
 " PLUGIN MAPPINGS
 "--- NERDtree ---"

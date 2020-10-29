@@ -1,24 +1,24 @@
 "--- PLUGINS ---"
 call plug#begin('~/.config/nvim/plugged')
-	Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/fzf.vim'
-	Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-abolish'
-	Plug 'lyokha/vim-xkbswitch'
+    Plug 'lyokha/vim-xkbswitch'
     Plug 'Yggdroot/indentLine'
     Plug 'ludovicchabant/vim-gutentags'
 
-	Plug 'preservim/nerdtree' |
-        	\ Plug 'Xuyuanp/nerdtree-git-plugin'
-	Plug 'ryanoasis/vim-devicons'
+    Plug 'preservim/nerdtree' |
+        \ Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'ryanoasis/vim-devicons'
 
-	" airline
-	Plug 'vim-airline/vim-airline' |
-		\ Plug 'vim-airline/vim-airline-themes'
+    " airline
+    Plug 'vim-airline/vim-airline' |
+        \ Plug 'vim-airline/vim-airline-themes'
 
-	" colorschemes
-	Plug 'frankier/neovim-colors-solarized-truecolor-only'
+    " colorschemes
+    Plug 'frankier/neovim-colors-solarized-truecolor-only'
 call plug#end()
 
 

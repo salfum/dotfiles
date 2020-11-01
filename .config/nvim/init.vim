@@ -29,6 +29,8 @@ set smarttab
 set expandtab
 set smartindent
 set breakindent
+set autowriteall
+set noerrorbells visualbell t_vb=
 
 " search
 set hlsearch                            " Enable search highlight

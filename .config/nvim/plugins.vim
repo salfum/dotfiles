@@ -8,6 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'lyokha/vim-xkbswitch'
     Plug 'Yggdroot/indentLine'
     Plug 'ludovicchabant/vim-gutentags'
+    Plug 'mhinz/vim-startify'
 
     Plug 'preservim/nerdtree' |
         \ Plug 'Xuyuanp/nerdtree-git-plugin'

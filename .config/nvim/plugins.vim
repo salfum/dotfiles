@@ -20,6 +20,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     " colorschemes
     Plug 'frankier/neovim-colors-solarized-truecolor-only'
+
+    " PHP
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 
@@ -45,6 +48,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,result:30'
 
 "--- fzf ---"
 nmap ; :Buffers<CR>

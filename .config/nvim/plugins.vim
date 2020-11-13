@@ -21,10 +21,9 @@ call plug#begin('~/.config/nvim/plugged')
     " colorschemes
     Plug 'frankier/neovim-colors-solarized-truecolor-only'
 
-    " PHP
+    " Completion
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
-
 
 " PLUGIN SETTINGS
 "--- Airline ---"
@@ -62,6 +61,10 @@ let g:fzf_preview_window = ['right:40%', 'ctrl-/']
 let g:gutentags_cache_dir = '~/.tags'
 let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_project_root = ['.git']
+
+"---coc.nvim ---"
+"coc-css
+autocmd FileType scss setl iskeyword+=@-@
 
 " PLUGIN MAPPINGS
 "--- NERDtree ---"

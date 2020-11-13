@@ -31,6 +31,8 @@ set smartindent
 set breakindent
 set autowriteall
 set noerrorbells visualbell t_vb=
+set cursorline
+set cursorcolumn
 
 " search
 set hlsearch                            " Enable search highlight

@@ -6,10 +6,6 @@ set $mod Mod4
 #****  ИЗМЕНЁННЫЕ НАСТРОЙКИ  ***#
 #*******************************#
 
-# цвета окон
-# class             border  backgr. text    indicator child_border
-# client.focused   #4c7899 #04263F #04263F #04263F   #04263F
-
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #30AD23   #30AD23
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
@@ -20,42 +16,35 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # Убирает рамки окна если оно одно на рабочем столе
-hide_edge_borders none #smart
+hide_edge_borders smart
 
-# Закрепление программы за рабочей областью
-#assign [class="KotatogramDesktop"] 3.
-assign [class="^Firefox$"] 1.
+# Автоматом переключает на предыдущий воркспейс, если нажал на текущий
+workspace_auto_back_and_forth yes
 
 # Демоны
 exec --no-startup-id xrandr --output VGA-0 --auto --left-of HDMI-0
 exec nitrogen --restore
-exec_always picom --config ~/.config/picom/compton.conf #compton -f -b --vsync
-exec unclutter -b
+exec_always picom --config ~/.config/picom/compton.conf
 exec_always --no-startup-id killall dunst || dunst -conf ~/.config/dunst/newdunstrc
 exec flameshot
 exec fluxgui
 exec_always --no-startup-id killall i3icons2 && i3icons2 -c ~/.config/i3/i3icons2.config || i3icons2 -c ~/.config/i3/i3icons2.config
-#exec clipmenud
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
 exec xsel --logfile /dev/null -i --clipboard
+exec_always dunst
+exec_always --no-startup-id /usr/lib/kdeconnectd
 
-#Раскладка
-exec setxkbmap "us,ru" ",winkeys" "grp:caps_toggle" -option altwin:swap_lalt_lwin -option caps:nocaps
-
-# Раскладки Dvorak с переключением
-# bindsym $mod+Prior exec --no-startup-id "setxkbmap -layout us,ru -variant dvp,winkeys -option grp:lwin_toggle, caps:backspace"
-# bindsym $mod+Next exec --no-startup-id "setxkbmap -layout us,ru -variant ,winkeys -option grp:lwin_toggle, caps:backspace"
-
-# Смена воркспейса
-# bindsym $mod+ampersand exec --no-startup-id ~/.config/i3/workspaceSwitcher.py next
-# bindsym $mod+Shift+ampersand exec --no-startup-id ~/.config/i3/workspaceSwitcher.py prev
+# Раскладка
+exec setxkbmap "us,ru" "," "grp:lctrl_lalt_toggle" -option altwin:swap_lalt_lwin -option ctrl:nocaps
+exec xmodmap -e "keycode 37 = BackSpace"
 
 # Программы
 exec kotatogram-desktop
-exec firefox
+exec chromium
 
 # Параметры телеграма для работы в режиме scratchpad
 for_window [class="KotatogramDesktop"] floating enable
+for_window [class="wednesday.exe"] floating enable
 for_window [class="KotatogramDesktop"] resize set 900 700
 for_window [class="KotatogramDesktop"] move position center
 exec --no-startup-id  "sleep 5; i3-msg '[instance=kotatogram-desktop] mark telescratch, move scratchpad'"
@@ -66,35 +55,32 @@ bindsym $mod+Shift+grave mark telescratch, move scratchpad
 # Показать скратчпад
 bindsym $mod+grave [con_mark="^telescratch$"] scratchpad show
 
-# Хоткеи программ
-bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec spacefm
+# Плавающие окна
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+# Параметры anbox
+for_window [class="anbox"] floating enable
+for_window [class="anbox"] move position center
 
 # Настройки rofi
 bindsym $mod+d exec xkb-switch -s 'us' & rofi -show drun -show-icons
-bindsym $mod+Tab exec rofi -show window
-bindsym $mod+Shift+p exec keepmenu
+bindsym $mod+Tab exec xkb-switch -s 'us' & rofi -show window
 bindsym $mod+Shift+n exec ~/.local/share/rofi/rofi_notes.sh
-#bindsym $mod+Shift+f exec rofi -show file-browser -modi file-browser
-#bindsym $mod+Shift+c exec clipmenu
 
 # Шрифт заголовков окон
 font pango:Roboto Light 12
-#font xft:Noto Sans 10
 
 # Убить окно по клику
-bindsym $mod+Shift+x exec kitty xkill
+bindsym $mod+Shift+x --release exec xkill
 
 # Скрин всего экрана
 bindsym Print exec flameshot screen -c
 # Скрин области
 bindsym Shift+Print exec flameshot gui
 
-# Вызов экранной лупы
-#bindsym $mod+m exec slop -r crosshair
-
 # Блокировка экрана
-bindsym $mod+p exec xkb-switch -s us && ~/.config/i3/i3lock-multimonitor/lock #i3lock -i ~/Изображения/123.png -t -f
+bindsym $mod+p exec xkb-switch -s us && ~/.config/i3/i3lock-multimonitor/lock
 
 # Изменение громкости
 bindsym $mod+F7 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10%
@@ -103,9 +89,9 @@ bindsym $mod+F5 exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-ste
 
 # Конфигурация панели
 bar {
-    status_command  i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
+    status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
     tray_output primary
-    font pango:Fira Code Medium 14 #11.7
+    font pango:Cantarell 13, Icons 13
     separator_symbol "|"
     position top
     modifier $mod
@@ -209,10 +195,6 @@ bindsym $mod+space focus mode_toggle
 # Переместить фокус на родительский контейнер
 bindsym $mod+a focus parent
 
-# Переместить фокус на дочерний контейнер
-#bindsym $mod+d focus child
-
-# Завершение работы
 bindsym $mod+o mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
@@ -229,9 +211,19 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-# Список рабочих областей (столов)
-# 1. 2. 3. 4. 5. 6. 7. 8. 9. 10.
+# Переключение мониторов
+bindsym $mod+m mode "$mode_monitor"
+set $mode_monitor (1)monitor 2(monitor's)
+mode "$mode_monitor" {
+    bindsym 1 exec xrandr --output VGA-0 --off --left-of HDMI-0 && sleep 5 && nitrogen --restore && mode "default"
+    bindsym 2 exec xrandr --output VGA-0 --auto --left-of HDMI-0 && sleep 5 && nitrogen --restore && mode "default"
 
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Список рабочих областей
 set $ws1 "1." 
 set $ws2 "2." 
 set $ws3 "3." 
@@ -268,7 +260,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Перечитать конфигурационный файл
-#bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c reload
 # Перезапуск оконного менеджера
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -277,11 +269,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt

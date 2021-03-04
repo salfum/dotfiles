@@ -96,6 +96,7 @@ alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 alias vim=nvim
+alias paclip="expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n 50"
 
 function homestead() {
 	( cd ~/homestead && vagrant $* )

@@ -39,15 +39,15 @@ exec setxkbmap "us,ru" "," "grp:lctrl_lalt_toggle" -option altwin:swap_lalt_lwin
 exec xmodmap -e "keycode 37 = BackSpace"
 
 # Программы
-exec kotatogram-desktop
+exec telegram-desktop
 exec chromium
 
 # Параметры телеграма для работы в режиме scratchpad
-for_window [class="KotatogramDesktop"] floating enable
+for_window [class="TelegramDesktop"] floating enable
 for_window [class="wednesday.exe"] floating enable
-for_window [class="KotatogramDesktop"] resize set 900 700
-for_window [class="KotatogramDesktop"] move position center
-exec --no-startup-id  "sleep 5; i3-msg '[instance=kotatogram-desktop] mark telescratch, move scratchpad'"
+for_window [class="TelegramDesktop"] resize set 900 700
+for_window [class="TelegramDesktop"] move position center
+exec --no-startup-id  "sleep 5; i3-msg '[instance=telegram-desktop] mark telescratch, move scratchpad'"
 
 # Спрятать окно в фокусе в скратчпад
 bindsym $mod+Shift+grave mark telescratch, move scratchpad

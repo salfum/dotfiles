@@ -66,6 +66,7 @@ for_window [class="anbox"] move position center
 # Настройки rofi
 bindsym $mod+d exec xkb-switch -s 'us' & rofi -show drun -show-icons
 bindsym $mod+Tab exec xkb-switch -s 'us' & rofi -show window
+bindsym $mod+z exec xkb-switch -s 'us' & rofi-zeal
 bindsym $mod+Shift+n exec ~/.local/share/rofi/rofi_notes.sh
 
 # Шрифт заголовков окон
@@ -219,6 +220,17 @@ mode "$mode_monitor" {
     bindsym 2 exec xrandr --output VGA-0 --auto --left-of HDMI-0 && sleep 5 && nitrogen --restore && mode "default"
 
     # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# osu! режим
+bindsym $mod+g mode "$mode_osu"
+set $mode_osu (1)on (2)off
+mode "$mode_osu" {
+    bindsym 1 exec sh ~/tablet.sh mode "default"
+    bindsym 2 exec_always picom --config ~/.config/picom/compton.conf mode "default"
+
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }

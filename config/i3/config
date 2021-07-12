@@ -22,7 +22,7 @@ hide_edge_borders smart
 workspace_auto_back_and_forth yes
 
 # Демоны
-exec --no-startup-id xrandr --output VGA-0 --auto --left-of HDMI-0
+#exec --no-startup-id xrandr --output VGA-0 --auto --left-of HDMI-0
 exec nitrogen --restore
 exec_always picom --config ~/.config/picom/compton.conf
 exec_always --no-startup-id killall dunst || dunst -conf ~/.config/dunst/newdunstrc
@@ -87,6 +87,10 @@ bindsym $mod+p exec xkb-switch -s us && ~/.config/i3/i3lock-multimonitor/lock
 bindsym $mod+F7 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +10%
 bindsym $mod+F6 exec pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -10%
 bindsym $mod+F5 exec pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
 
 # Конфигурация панели
 bar {
